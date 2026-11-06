@@ -1,7 +1,7 @@
 # This workflow will build a golang project
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-go
 
-name: Go
+name: Go CI/CD Pipeline
 
 on:
   push:
@@ -26,3 +26,16 @@ jobs:
 
     - name: Test
       run: go test -v ./...
+
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: Build and Push Docker Image
+      uses: docker/build-push-action@v4
+      with:
+        context: .
+        push: true
+        tags: hazai24/praktikum-popl:latest
