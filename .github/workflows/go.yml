@@ -38,4 +38,4 @@ jobs:
       with:
         context: .
         push: true
-        tags: hazai24/praktikum-popl:latest
+        tags: hazai24/belajar-cicd-pemula:latest
